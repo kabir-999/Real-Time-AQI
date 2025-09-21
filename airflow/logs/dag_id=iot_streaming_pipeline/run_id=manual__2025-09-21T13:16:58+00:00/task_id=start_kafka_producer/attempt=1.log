@@ -1,0 +1,56 @@
+[2025-09-21T13:17:34.242+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-09-21T13:17:34.260+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: iot_streaming_pipeline.start_kafka_producer manual__2025-09-21T13:16:58+00:00 [queued]>
+[2025-09-21T13:17:34.264+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: iot_streaming_pipeline.start_kafka_producer manual__2025-09-21T13:16:58+00:00 [queued]>
+[2025-09-21T13:17:34.265+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 4
+[2025-09-21T13:17:34.271+0000] {taskinstance.py:2330} INFO - Executing <Task(BashOperator): start_kafka_producer> on 2025-09-21 13:16:58+00:00
+[2025-09-21T13:17:34.274+0000] {standard_task_runner.py:63} INFO - Started process 201 to run task
+[2025-09-21T13:17:34.276+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'iot_streaming_pipeline', 'start_kafka_producer', 'manual__2025-09-21T13:16:58+00:00', '--job-id', '29', '--raw', '--subdir', 'DAGS_FOLDER/iot_pipeline_dag.py', '--cfg-path', '/tmp/tmpo1lex5js']
+[2025-09-21T13:17:34.278+0000] {standard_task_runner.py:91} INFO - Job 29: Subtask start_kafka_producer
+[2025-09-21T13:17:34.287+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.12/site-packages/***/settings.py:195 DeprecationWarning: The sql_alchemy_conn option in [core] has been moved to the sql_alchemy_conn option in [database] - the old setting has been used, but please update your config.
+[2025-09-21T13:17:34.307+0000] {task_command.py:426} INFO - Running <TaskInstance: iot_streaming_pipeline.start_kafka_producer manual__2025-09-21T13:16:58+00:00 [running]> on host 65c320335604
+[2025-09-21T13:17:34.353+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='iot_streaming_pipeline' AIRFLOW_CTX_TASK_ID='start_kafka_producer' AIRFLOW_CTX_EXECUTION_DATE='2025-09-21T13:16:58+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-09-21T13:16:58+00:00'
+[2025-09-21T13:17:34.353+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-09-21T13:17:34.508+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2025-09-21T13:17:34.508+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', 'cd /opt/*** && python kafka_producer/producer.py']
+[2025-09-21T13:17:34.513+0000] {subprocess.py:86} INFO - Output:
+[2025-09-21T13:17:34.751+0000] {subprocess.py:93} INFO - Traceback (most recent call last):
+[2025-09-21T13:17:34.752+0000] {subprocess.py:93} INFO -   File "/opt/***/kafka_producer/producer.py", line 1, in <module>
+[2025-09-21T13:17:34.752+0000] {subprocess.py:93} INFO -     from kafka import KafkaProducer, KafkaError
+[2025-09-21T13:17:34.752+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.12/site-packages/kafka/__init__.py", line 23, in <module>
+[2025-09-21T13:17:34.752+0000] {subprocess.py:93} INFO -     from kafka.consumer import KafkaConsumer
+[2025-09-21T13:17:34.752+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.12/site-packages/kafka/consumer/__init__.py", line 3, in <module>
+[2025-09-21T13:17:34.753+0000] {subprocess.py:93} INFO -     from kafka.consumer.group import KafkaConsumer
+[2025-09-21T13:17:34.753+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.12/site-packages/kafka/consumer/group.py", line 13, in <module>
+[2025-09-21T13:17:34.753+0000] {subprocess.py:93} INFO -     from kafka.consumer.fetcher import Fetcher
+[2025-09-21T13:17:34.753+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.12/site-packages/kafka/consumer/fetcher.py", line 19, in <module>
+[2025-09-21T13:17:34.753+0000] {subprocess.py:93} INFO -     from kafka.record import MemoryRecords
+[2025-09-21T13:17:34.753+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.12/site-packages/kafka/record/__init__.py", line 1, in <module>
+[2025-09-21T13:17:34.754+0000] {subprocess.py:93} INFO -     from kafka.record.memory_records import MemoryRecords, MemoryRecordsBuilder
+[2025-09-21T13:17:34.754+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.12/site-packages/kafka/record/memory_records.py", line 27, in <module>
+[2025-09-21T13:17:34.754+0000] {subprocess.py:93} INFO -     from kafka.record.legacy_records import LegacyRecordBatch, LegacyRecordBatchBuilder
+[2025-09-21T13:17:34.754+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.12/site-packages/kafka/record/legacy_records.py", line 50, in <module>
+[2025-09-21T13:17:34.754+0000] {subprocess.py:93} INFO -     from kafka.codec import (
+[2025-09-21T13:17:34.755+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.12/site-packages/kafka/codec.py", line 9, in <module>
+[2025-09-21T13:17:34.755+0000] {subprocess.py:93} INFO -     from kafka.vendor.six.moves import range
+[2025-09-21T13:17:34.755+0000] {subprocess.py:93} INFO - ModuleNotFoundError: No module named 'kafka.vendor.six.moves'
+[2025-09-21T13:17:34.769+0000] {subprocess.py:97} INFO - Command exited with return code 1
+[2025-09-21T13:17:34.770+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-09-21T13:17:34.785+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 460, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 401, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/bash.py", line 243, in execute
+    raise AirflowException(
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 1.
+[2025-09-21T13:17:34.793+0000] {taskinstance.py:1206} INFO - Marking task as UP_FOR_RETRY. dag_id=iot_streaming_pipeline, task_id=start_kafka_producer, run_id=manual__2025-09-21T13:16:58+00:00, execution_date=20250921T131658, start_date=20250921T131734, end_date=20250921T131734
+[2025-09-21T13:17:34.805+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 29 for task start_kafka_producer (Bash command failed. The command returned a non-zero exit code 1.; 201)
+[2025-09-21T13:17:34.833+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2025-09-21T13:17:34.898+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-09-21T13:17:34.902+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

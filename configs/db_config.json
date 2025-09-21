@@ -1,0 +1,7 @@
+{
+  "host": "localhost",
+  "port": 5433,
+  "database": "aqi_db",
+  "user": "aqi_user",
+  "password": "aqi_password"
+}

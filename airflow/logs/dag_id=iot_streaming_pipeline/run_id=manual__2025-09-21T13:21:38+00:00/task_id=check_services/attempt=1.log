@@ -1,0 +1,21 @@
+[2025-09-21T13:25:12.676+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-09-21T13:25:12.695+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: iot_streaming_pipeline.check_services manual__2025-09-21T13:21:38+00:00 [queued]>
+[2025-09-21T13:25:12.699+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: iot_streaming_pipeline.check_services manual__2025-09-21T13:21:38+00:00 [queued]>
+[2025-09-21T13:25:12.699+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 4
+[2025-09-21T13:25:12.706+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): check_services> on 2025-09-21 13:21:38+00:00
+[2025-09-21T13:25:12.709+0000] {standard_task_runner.py:63} INFO - Started process 200 to run task
+[2025-09-21T13:25:12.711+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'iot_streaming_pipeline', 'check_services', 'manual__2025-09-21T13:21:38+00:00', '--job-id', '39', '--raw', '--subdir', 'DAGS_FOLDER/iot_pipeline_dag.py', '--cfg-path', '/tmp/tmpbat7ulr7']
+[2025-09-21T13:25:12.712+0000] {standard_task_runner.py:91} INFO - Job 39: Subtask check_services
+[2025-09-21T13:25:12.721+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.12/site-packages/***/settings.py:195 DeprecationWarning: The sql_alchemy_conn option in [core] has been moved to the sql_alchemy_conn option in [database] - the old setting has been used, but please update your config.
+[2025-09-21T13:25:12.744+0000] {task_command.py:426} INFO - Running <TaskInstance: iot_streaming_pipeline.check_services manual__2025-09-21T13:21:38+00:00 [running]> on host b51589c8d8d9
+[2025-09-21T13:25:12.789+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='iot_streaming_pipeline' AIRFLOW_CTX_TASK_ID='check_services' AIRFLOW_CTX_EXECUTION_DATE='2025-09-21T13:21:38+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-09-21T13:21:38+00:00'
+[2025-09-21T13:25:12.790+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-09-21T13:25:12.939+0000] {iot_pipeline_dag.py:91} ERROR - ❌ Error checking kafka: [Errno -2] Name or service not known
+[2025-09-21T13:25:12.940+0000] {iot_pipeline_dag.py:76} INFO - ✅ postgres service is running on postgres:5432
+[2025-09-21T13:25:12.956+0000] {iot_pipeline_dag.py:91} ERROR - ❌ Error checking spark-master: [Errno -2] Name or service not known
+[2025-09-21T13:25:12.956+0000] {python.py:237} INFO - Done. Returned value was: False
+[2025-09-21T13:25:12.957+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-09-21T13:25:12.968+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=iot_streaming_pipeline, task_id=check_services, run_id=manual__2025-09-21T13:21:38+00:00, execution_date=20250921T132138, start_date=20250921T132512, end_date=20250921T132512
+[2025-09-21T13:25:12.981+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2025-09-21T13:25:12.997+0000] {taskinstance.py:3503} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2025-09-21T13:25:12.998+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
