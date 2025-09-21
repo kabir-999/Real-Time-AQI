@@ -29,19 +29,19 @@ def create_producer():
             'delivery.timeout.ms': 30000,  # 30 seconds
             'request.timeout.ms': 10000,   # 10 seconds
         })
-        logger.info("✅ Kafka producer created successfully")
+        logger.info("Kafka producer created successfully")
         return producer
     except Exception as e:
-        logger.error(f"❌ Failed to create Kafka producer: {e}")
+        logger.error(f"Failed to create Kafka producer: {e}")
         raise
 
 # Delivery callback
 def delivery_report(err, msg):
     """Callback function for message delivery reports"""
     if err is not None:
-        logger.error(f"❌ Message delivery failed: {err}")
+        logger.error(f"Message delivery failed: {err}")
     else:
-        logger.info(f"✅ Message delivered to {msg.topic()} [{msg.partition()}] at offset {msg.offset()}")
+        logger.info(f"Message delivered to {msg.topic()} [{msg.partition()}] at offset {msg.offset()}")
 
 csv_file = "/Users/kabirmathur/Documents/AQI/data/air_quality_health_dataset.csv"
 
@@ -51,16 +51,16 @@ def preview_csv():
     try:
         with open(csv_file, "r") as f:
             reader = csv.DictReader(f)
-            logger.info("📄 CSV Preview (first 5 rows):")
+            logger.info("CSV Preview (first 5 rows):")
             for i, row in enumerate(reader):
                 logger.info(f"Row {i+1}: {row}")
                 if i >= 4:  # Show first 5 rows
                     break
     except FileNotFoundError:
-        logger.error(f"❌ CSV file not found: {csv_file}")
+        logger.error(f"CSV file not found: {csv_file}")
         sys.exit(1)
     except Exception as e:
-        logger.error(f"❌ Error reading CSV file: {e}")
+        logger.error(f"Error reading CSV file: {e}")
         sys.exit(1)
 
 def analyze_csv_structure():
@@ -71,10 +71,10 @@ def analyze_csv_structure():
             rows = list(reader)
 
         if not rows:
-            logger.error("❌ CSV file is empty")
+            logger.error("CSV file is empty")
             return None
 
-        logger.info(f"📊 Analyzing {len(rows)} rows from CSV")
+        logger.info(f"Analyzing {len(rows)} rows from CSV")
 
         # Get column names and sample values
         sample_row = rows[0]
@@ -100,11 +100,11 @@ def analyze_csv_structure():
                     column_info[column_name]['max'] = max(values)
                     column_info[column_name]['avg'] = sum(values) / len(values)
 
-        logger.info(f"📋 Column analysis: {len(column_info)} columns detected")
+        logger.info(f"Column analysis: {len(column_info)} columns detected")
         return column_info
 
     except Exception as e:
-        logger.error(f"❌ Error analyzing CSV: {e}")
+        logger.error(f"Error analyzing CSV: {e}")
         return None
 
 def generate_random_row(column_info, regions_list):
@@ -160,21 +160,21 @@ def send_to_kafka(producer):
         # Analyze CSV structure first
         column_info = analyze_csv_structure()
         if not column_info:
-            logger.error("❌ Failed to analyze CSV structure")
+            logger.error("Failed to analyze CSV structure")
             return False
 
         # Get regions for random generation (only valid regions)
         regions_list = ['North', 'South', 'East', 'West', 'Central']
-        logger.info(f"🌍 Using only valid regions: {regions_list}")
+        logger.info(f"Using only valid regions: {regions_list}")
 
         # First pass: send CSV data
-        logger.info("📄 Starting CSV data streaming...")
+        logger.info("Starting CSV data streaming...")
         with open(csv_file, 'r') as f:
             reader = csv.DictReader(f)
 
             # Count total rows first
             total_rows = sum(1 for _ in reader)
-            logger.info(f"📊 Starting to stream {total_rows} rows from CSV")
+            logger.info(f"Starting to stream {total_rows} rows from CSV")
 
             # Reset file pointer
             f.seek(0)
@@ -198,38 +198,38 @@ def send_to_kafka(producer):
                     success_count += 1
                     consecutive_errors = 0  # Reset error counter
 
-                    logger.info(f"✅ CSV row {i+1}/{total_rows}: {row.get('region', 'N/A')} - AQI: {row.get('AQI', 'N/A')}")
+                    logger.info(f"CSV row {i+1}/{total_rows}: {row.get('region', 'N/A')} - AQI: {row.get('AQI', 'N/A')}")
 
                     # Flush every 10 messages to ensure delivery
                     if success_count % 10 == 0:
                         producer.flush(timeout=10)
-                        logger.info(f"📤 Flushed {success_count} messages to Kafka")
+                        logger.info(f"Flushed {success_count} messages to Kafka")
 
                     time.sleep(1)  # 1 second delay between messages
 
                 except KafkaException as e:
                     error_count += 1
                     consecutive_errors += 1
-                    logger.error(f"❌ Kafka exception sending CSV row {i+1}: {e}")
+                    logger.error(f"Kafka exception sending CSV row {i+1}: {e}")
 
                     if consecutive_errors >= max_errors:
-                        logger.error(f"🚫 Too many consecutive errors ({consecutive_errors}). Exiting.")
+                        logger.error(f"Too many consecutive errors ({consecutive_errors}). Exiting.")
                         return False
 
                     time.sleep(5)  # Longer pause after error
 
                 except Exception as e:
                     error_count += 1
-                    logger.error(f"❌ Unexpected error sending CSV row {i+1}: {e}")
+                    logger.error(f"Unexpected error sending CSV row {i+1}: {e}")
                     return False
 
         # Final flush for CSV data
-        logger.info("🔄 Final flush of CSV messages...")
+        logger.info("Final flush of CSV messages...")
         producer.flush(timeout=30)
-        logger.info("✅ All CSV messages flushed successfully")
+        logger.info("All CSV messages flushed successfully")
 
         # Switch to random data generation
-        logger.info("🔄 CSV data completed! Starting random data generation...")
+        logger.info("CSV data completed! Starting random data generation...")
         is_generating_random = True
 
         # Second pass: generate and send random data indefinitely
@@ -256,39 +256,39 @@ def send_to_kafka(producer):
                 success_count += 1
                 consecutive_errors = 0  # Reset error counter
 
-                logger.info(f"🎲 Random #{random_count}: {random_row.get('region', 'N/A')} - AQI: {random_row.get('AQI', 'N/A')}")
+                logger.info(f"Random #{random_count}: {random_row.get('region', 'N/A')} - AQI: {random_row.get('AQI', 'N/A')}")
 
                 # Flush every 10 messages to ensure delivery
                 if success_count % 10 == 0:
                     producer.flush(timeout=10)
-                    logger.info(f"📤 Flushed {success_count} total messages to Kafka")
+                    logger.info(f"Flushed {success_count} total messages to Kafka")
 
                 time.sleep(1)  # 1 second delay between messages
 
             except KafkaException as e:
                 error_count += 1
                 consecutive_errors += 1
-                logger.error(f"❌ Kafka exception sending random data #{random_count}: {e}")
+                logger.error(f"Kafka exception sending random data #{random_count}: {e}")
 
                 if consecutive_errors >= max_errors:
-                    logger.error(f"🚫 Too many consecutive errors ({consecutive_errors}). Exiting.")
+                    logger.error(f"Too many consecutive errors ({consecutive_errors}). Exiting.")
                     return False
 
                 time.sleep(5)  # Longer pause after error
 
             except Exception as e:
                 error_count += 1
-                logger.error(f"❌ Unexpected error generating random data #{random_count}: {e}")
+                logger.error(f"Unexpected error generating random data #{random_count}: {e}")
                 return False
 
     except FileNotFoundError:
-        logger.error(f"❌ CSV file not found: {csv_file}")
+        logger.error(f"CSV file not found: {csv_file}")
         return False
     except Exception as e:
-        logger.error(f"❌ Error reading CSV file: {e}")
+        logger.error(f"Error reading CSV file: {e}")
         return False
 
-    logger.info(f"📊 Streaming completed. Success: {success_count}, Errors: {error_count}")
+    logger.info(f"Streaming completed. Success: {success_count}, Errors: {error_count}")
     return success_count > 0
 
 
@@ -308,19 +308,19 @@ def main():
         success = send_to_kafka(producer)
 
         if success:
-            logger.info("✅ Kafka producer completed successfully")
+            logger.info("Kafka producer completed successfully")
             return 0
         else:
-            logger.error("❌ Kafka producer failed")
+            logger.error("Kafka producer failed")
             return 1
 
     except KeyboardInterrupt:
-        logger.info("⏹️ Received keyboard interrupt, shutting down gracefully...")
+        logger.info("⏹Received keyboard interrupt, shutting down gracefully...")
         if 'producer' in locals():
             producer.flush(timeout=10)
         return 0
     except Exception as e:
-        logger.error(f"❌ Fatal error in Kafka producer: {e}")
+        logger.error(f"Fatal error in Kafka producer: {e}")
         return 1
     finally:
         # Cleanup

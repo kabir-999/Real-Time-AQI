@@ -1,20 +1,9 @@
-# Kafka producer client - using confluent-kafka for better compatibility
 confluent-kafka==2.6.1
-
-# Spark (works with PySpark 3.x, match your installed Spark)
 pyspark==3.5.3
-
-# PostgreSQL driver for Python
 psycopg2-binary==2.9.10
-
-# Airflow (core + postgres support)
 apache-airflow==2.9.2
 apache-airflow-providers-postgres==5.10.0
-
-# For config parsing
 python-dotenv==1.0.1
-
-# Optional: for dashboards/visualizations (not required for core pipeline)
 matplotlib==3.9.2
 pandas==2.2.3
 numpy==2.0.2

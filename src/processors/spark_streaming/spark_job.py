@@ -97,7 +97,7 @@ aggregated_df = iot_data_with_ts \
 def main():
     """Main function to run the Spark streaming job with error handling"""
     try:
-        logger.info("🚀 Starting AQI IoT Spark Streaming Job")
+        logger.info("Starting AQI IoT Spark Streaming Job")
 
         # Test database connection first
         test_db_connection()
@@ -108,22 +108,22 @@ def main():
             .trigger(processingTime="1 minute") \
             .start()
 
-        logger.info("✅ Spark streaming job started successfully")
-        logger.info("📊 Monitoring for data from Kafka topic: iot-sensor-data")
-        logger.info("💾 Writing aggregated data to PostgreSQL")
-        logger.info("⏱️ Processing new data every minute")
+        logger.info("Spark streaming job started successfully")
+        logger.info("Monitoring for data from Kafka topic: iot-sensor-data")
+        logger.info("Writing aggregated data to PostgreSQL")
+        logger.info("⏱Processing new data every minute")
 
         # Wait for the termination of the query
         query.awaitTermination()
 
     except KeyboardInterrupt:
-        logger.info("⏹️ Received keyboard interrupt, stopping streaming job...")
+        logger.info("⏹Received keyboard interrupt, stopping streaming job...")
         if 'query' in locals():
             query.stop()
-        logger.info("✅ Streaming job stopped gracefully")
+        logger.info("Streaming job stopped gracefully")
         sys.exit(0)
     except Exception as e:
-        logger.error(f"❌ Fatal error in Spark streaming job: {e}")
+        logger.error(f"Fatal error in Spark streaming job: {e}")
         if 'query' in locals():
             query.stop()
         sys.exit(1)
@@ -131,7 +131,7 @@ def main():
 def write_to_postgres(df, epoch_id):
     """Write batch to PostgreSQL"""
     try:
-        logger.info(f"📝 Writing batch {epoch_id} to PostgreSQL")
+        logger.info(f"Writing batch {epoch_id} to PostgreSQL")
 
         df.write \
             .format("jdbc") \
@@ -143,10 +143,10 @@ def write_to_postgres(df, epoch_id):
             .mode("append") \
             .save()
 
-        logger.info(f"✅ Successfully wrote batch {epoch_id} to PostgreSQL")
+        logger.info(f"Successfully wrote batch {epoch_id} to PostgreSQL")
 
     except Exception as e:
-        logger.error(f"❌ Error writing batch {epoch_id} to PostgreSQL: {e}")
+        logger.error(f"Error writing batch {epoch_id} to PostgreSQL: {e}")
         raise
 
 def test_db_connection():
@@ -164,9 +164,9 @@ def test_db_connection():
             .mode("append") \
             .save()
 
-        logger.info("✅ Database connection test successful")
+        logger.info("Database connection test successful")
     except Exception as e:
-        logger.error(f"❌ Database connection test failed: {e}")
+        logger.error(f"Database connection test failed: {e}")
         raise
 
 
