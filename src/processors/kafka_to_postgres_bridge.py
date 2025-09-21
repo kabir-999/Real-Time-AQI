@@ -129,16 +129,16 @@ def main():
 
                 # Log progress every 10 messages
                 if processed_count % 10 == 0:
-                    logger.info(f"📊 Processed {processed_count} messages")
+                    logger.info(f"Processed {processed_count} messages")
 
     except KeyboardInterrupt:
-        logger.info("⏹️ Received keyboard interrupt, shutting down...")
+        logger.info("⏹Received keyboard interrupt, shutting down...")
     except Exception as e:
-        logger.error(f"❌ Fatal error: {e}")
+        logger.error(f"Fatal error: {e}")
     finally:
         consumer.close()
         conn.close()
-        logger.info("✅ Shutdown complete")
+        logger.info("Shutdown complete")
 
 if __name__ == '__main__':
     main()
